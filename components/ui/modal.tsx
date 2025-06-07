@@ -35,22 +35,26 @@ export function Modal({ isOpen, onClose, title, children, className }: ModalProp
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Backdrop */}
-      <div className="fixed inset-0 bg-black/80 backdrop-blur-sm" onClick={onClose} />
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4">
+      {/* Enhanced Backdrop */}
+      <div className="fixed inset-0 bg-black/70 backdrop-blur-xl" onClick={onClose} />
 
       {/* Modal */}
       <div
         className={cn(
-          "relative z-50 w-full max-w-lg mx-4 bg-gray-800 border border-gray-700 rounded-lg shadow-lg",
+          "relative z-50 w-full max-w-lg glass-modal transform transition-all duration-500 ease-out",
+          isOpen ? "scale-100 opacity-100" : "scale-95 opacity-0",
           className,
         )}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-700">
-          <h2 className="text-lg font-semibold text-white">{title}</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-white transition-colors">
+        <div className="flex items-center justify-between p-6 border-b border-white/10">
+          <h2 className="text-xl font-bold text-white">{title}</h2>
+          <button
+            onClick={onClose}
+            className="w-10 h-10 glass-button flex items-center justify-center text-gray-400 hover:text-white transition-all duration-300"
+          >
             <X className="h-5 w-5" />
           </button>
         </div>
